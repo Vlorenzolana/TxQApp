@@ -1,4 +1,4 @@
-# 🌩️ Aplicación TxQApp
+# Aplicación TxQApp
 
 **TxQApp** es fruto de una colaboración abierta entre el desarrollador de software Beñat Castro, cmvgg e Hybridoa.
 
@@ -10,11 +10,11 @@ La app habilita los sensores táctiles de nuestros dispositivos, que se activan 
 
 ---
 
-# 🎛️ Flutter + Python + TouchDesigner: Aplicación Audiovisual Interactiva
+# Flutter + Python + TouchDesigner: Aplicación Audiovisual Interactiva
 
 Esta aplicación es una interfaz móvil desarrollada en **Flutter** que se comunica en tiempo real con un backend audiovisual programado en **Python (OpenCV)** o **TouchDesigner**, permitiendo interacciones visuales y sonoras desde dispositivos Android.
 
-## 🚀 Características Principales
+## Características Principales
 
 - **Interfaz táctil Flutter**: Muestra una rejilla interactiva que responde al tacto con sonido o comandos visuales.
 - **Backend visual/audio**: Puede usarse con:
@@ -23,9 +23,9 @@ Esta aplicación es una interfaz móvil desarrollada en **Flutter** que se comun
 - **Reproducción de sonido local** al interactuar con la interfaz.
 - **Simulación de gota de agua** con efecto visual en pantalla.
 
-## 🔄 Comunicación Bidireccional en Tiempo Real
+## Comunicación Bidireccional en Tiempo Real
 
-### ✔️ Soporte para OSC (Open Sound Control)
+### Soporte para OSC (Open Sound Control)
 
 - Flutter puede enviar mensajes OSC a TouchDesigner o Python.
 - TouchDesigner puede recibir e interpretar esos datos para disparar efectos visuales o sonoros.
@@ -39,25 +39,12 @@ OSC.send(
 );
 ```
 
-### ✔️ Soporte para WebSocket
+### Soporte para WebSocket
 
 - Se puede usar un servidor WebSocket en Python para permitir una **comunicación bidireccional persistente**.
 
-## 🖼️ Ejemplos Visuales
 
-### 📱 Interfaz de Rejilla Interactiva en Flutter
-
-![Flutter Grid UI](https://tse2.mm.bing.net/th?id=OIP.RB88e0lQPSZPIv1Z3VjiVAHaEK&pid=Api)
-
-### 🎥 Streaming de Video con OpenCV
-
-![OpenCV Stream](https://tse1.mm.bing.net/th?id=OIP.v3wFCCThtPy8nE3o7EWGLgHaEM&pid=Api)
-
-### 🎛️ TouchDesigner OSC Setup
-
-![TouchDesigner OSC](https://tse1.mm.bing.net/th/id/OIP.gha3KvRf5Z-3vorBZridfwHaEb?pid=Api)
-
-## 🧰 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 ├── flutter_app/
@@ -73,7 +60,7 @@ OSC.send(
     └── visuales.toe
 ```
 
-## 🛠️ Instalación
+## Instalación
 
 ### Flutter
 
@@ -106,4 +93,4 @@ python server.py
 
 ## 📄 Licencia
 
-MIT. Uso libre para proyectos creativos, educativos o experimentales.
+MIT. Uso libre para proyectos educativos o experimentales.
