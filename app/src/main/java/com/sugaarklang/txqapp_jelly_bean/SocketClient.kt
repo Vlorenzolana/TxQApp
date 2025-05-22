@@ -9,7 +9,8 @@ class SocketClient(private val targetIp: String) {
         Thread {
             try {
                 Log.i("SOCKET", "Sending meesage: $message")
-                val socket = Socket(targetIp, 12345)
+                val socket = Socket(targetIp, MainActivity.port)
+                // Para que usamos autoflush: https://chatgpt.com/share/682ee7dc-6644-8002-8fb1-9f21d67f2be2
                 val writer = PrintWriter(socket.getOutputStream(), true)
                 writer.println(message)
                 socket.close()

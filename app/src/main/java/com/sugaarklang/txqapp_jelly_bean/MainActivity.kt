@@ -9,19 +9,18 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View               // For View.GONE and View.VISIBLE constants
 import android.view.WindowManager
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import java.io.IOException
-import java.net.InetSocketAddress
-import java.net.Socket
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var socketClient: SocketClient
     private lateinit var serverThread: SocketServerThread
     private lateinit var gridView: GridViewCanvas
-    private var port = 12345
+
+    // Esta es la forma de crear variables estaticas en kotlin
+    companion object {
+        val port = 12345
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

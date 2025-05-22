@@ -10,7 +10,7 @@ class SocketServerThread(
 ) : Thread() {
     override fun run() {
         try {
-            val serverSocket = ServerSocket(12345) // Each tablet listens on the same port
+            val serverSocket = ServerSocket(MainActivity.port) // Each tablet listens on the same port
             while (true) {
                 val client = serverSocket.accept()
                 val reader = BufferedReader(InputStreamReader(client.getInputStream()))

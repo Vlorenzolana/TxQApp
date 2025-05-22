@@ -14,19 +14,21 @@
         android:layout_height="wrap_content"
         android:paddingBottom="24dp"/>
 
+
     <EditText
         android:id="@+id/ipInput"
-        android:hint="Enter other tablet's IP"
-        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"/>
+        android:hint="Enter other tablet's IP"
+        android:inputType="text"
+        android:padding="12dp"
+        android:text="172.16.64." />
 
     <Button
         android:id="@+id/connectButton"
-        android:text="Connect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="24dp"
+        android:text="Connect" />
 
 </LinearLayout>

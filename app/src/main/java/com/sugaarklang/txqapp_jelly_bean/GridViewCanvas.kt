@@ -11,13 +11,12 @@ import android.view.View
 import android.util.Log
 import kotlin.random.Random
 
-class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) : View(context) {
+class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit, val onInactivity: Runnable) : View(context) {
+
+    private val INACTIVITY_TIMEOUT_MS = 1_000L  // 10 seconds, change as needed
     private val rows = 4
     private val cols = 4
-    private val gridPaint = Paint().apply {
-        color = Color.GRAY
-        strokeWidth = 3f
-    }
+
     private val fillPaint = Paint().apply {
         color = Color.BLACK
     }
