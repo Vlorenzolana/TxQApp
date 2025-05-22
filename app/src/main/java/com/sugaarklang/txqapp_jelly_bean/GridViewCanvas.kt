@@ -15,8 +15,8 @@ import kotlin.random.Random
 class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) : View(context) {
 
     //private val INACTIVITY_TIMEOUT_MS = 1_000L  // 10 seconds, change as needed
-    private val rows = 4
-    private val cols = 4
+    private val rows = 4 // Numero de filas
+    private val cols = 4 // Numero de columnas
     private val blinkDelayMs: Long = 100
 
     private val fillPaint = Paint().apply {
