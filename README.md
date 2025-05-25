@@ -1,16 +1,3 @@
-# sugaarklang
+# TxQApp para Sugaarklang
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Sugaarklang es una escultura interactiva y utiliza TxQApp (txalakuantika) una aplicacion audiovisual inspirada en la txalaparta que emula un ciclo natural de lluvia a la vez que analiza los modelos de prediccion meteorologica dentro de su ecosistema inestable.
