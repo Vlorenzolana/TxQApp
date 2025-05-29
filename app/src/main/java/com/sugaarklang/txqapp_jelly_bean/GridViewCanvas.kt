@@ -9,73 +9,42 @@ import android.os.Looper
 import android.view.MotionEvent
 import android.view.View
 import android.util.Log
-import kotlin.random.Random
 
 class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) : View(context) {
-    private val rows = 4
-    private val cols = 4
+    private val fillPaint = Paint().apply { color = Color.BLACK }
+    private val blinkPaint = Paint().apply { color = Color.WHITE }
 
-    private val fillPaint = Paint().apply {
-        color = Color.BLACK
-    }
-    private val blinkPaint = Paint().apply {
-        color = Color.WHITE
-    }
-
-    private var cellWidth = 0f
-    private var cellHeight = 0f
-    private var blinkRow = -1
-    private var blinkCol = -1
-
+    private var flashWholeScreen = false
     private val handler = Handler(Looper.getMainLooper())
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
-        cellWidth = width / cols.toFloat()
-        cellHeight = height / rows.toFloat()
-
-        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), fillPaint)
-
-        if (blinkRow != -1 && blinkCol != -1) {
-            val left = blinkCol * cellWidth
-            val top = blinkRow * cellHeight
-            val right = left + cellWidth
-            val bottom = top + cellHeight
-            canvas.drawRect(left, top, right, bottom, blinkPaint)
+        if (flashWholeScreen) {
+            canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), blinkPaint)
+        } else {
+            canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), fillPaint)
         }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
-            val col = (event.x / cellWidth).toInt()
-            val row = (event.y / cellHeight).toInt()
-
-            blinkRow = row
-            blinkCol = col
-            invalidate()
-
+            flashVisualPattern()
             onTouchCallback(false)
-
-            handler.postDelayed({
-                blinkRow = -1
-                blinkCol = -1
-                invalidate()
-            }, 100)
-            Log.d("GRID", "On Touch Event")
             return true
         }
         return super.onTouchEvent(event)
     }
 
-    fun blinkFromRemote() {
-        blinkRow = Random.nextInt(this.rows)
-        blinkCol = Random.nextInt(this.cols)
+    private fun flashVisualPattern() {
+        flashWholeScreen = true
         invalidate()
         handler.postDelayed({
-            blinkRow = -1
-            blinkCol = -1
+            flashWholeScreen = false
             invalidate()
-        }, 100)
+        }, 80)
+    }
+
+    fun flashFullScreen() {
+        flashVisualPattern()
     }
 }

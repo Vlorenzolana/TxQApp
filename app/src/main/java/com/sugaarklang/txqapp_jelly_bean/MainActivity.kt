@@ -3,57 +3,61 @@ package com.sugaarklang.txqapp_jelly_bean
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.text.format.Formatter
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var socketClient: SocketClient
     private lateinit var serverThread: SocketServerThread
     private lateinit var gridView: GridViewCanvas
+    private lateinit var broadcastSender: BroadcastSender
+    private lateinit var broadcastReceiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
 
         val myIpTextView = findViewById<TextView>(R.id.myIpTextView)
-        val ipInput = findViewById<EditText>(R.id.ipInput)
-        val connectButton = findViewById<Button>(R.id.connectButton)
-
         val myIp = getLocalIpAddress()
         myIpTextView.text = "Your IP: $myIp"
 
+        // Start grid
         gridView = GridViewCanvas(this) { touchedFromRemote ->
             if (!touchedFromRemote) {
                 socketClient.send("TOUCH")
             }
         }
 
+        // Start server thread
         serverThread = SocketServerThread { message ->
             if (message == "TOUCH") {
                 runOnUiThread {
-                    gridView.blinkFromRemote()
+                    gridView.flashFullScreen()
                 }
             }
         }
         serverThread.start()
 
-        connectButton.setOnClickListener {
-            val targetIp = ipInput.text.toString().trim()
-            if (targetIp.isNotEmpty()) {
-                socketClient = SocketClient(targetIp)
-                socketClient.connect()
-                runOnUiThread {
-                    transitionToGrid(ipInput)
+        // Start broadcasting our IP
+        broadcastSender = BroadcastSender(myIp)
+        broadcastSender.start()
+
+        // Listen for other broadcasts
+        broadcastReceiver = BroadcastReceiver({ otherIp ->
+            if (!::socketClient.isInitialized) {
+                socketClient = SocketClient(otherIp)
+                socketClient.connect {
+                    runOnUiThread {
+                        transitionToGrid()
+                    }
                 }
             }
-        }
+        })
+        broadcastReceiver.start()
     }
 
     private fun getLocalIpAddress(): String {
@@ -61,12 +65,8 @@ class MainActivity : AppCompatActivity() {
         return Formatter.formatIpAddress(wifiManager.connectionInfo.ipAddress)
     }
 
-    private fun transitionToGrid(ipInput: EditText) {
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(ipInput.windowToken, 0)
-
+    private fun transitionToGrid() {
         supportActionBar?.hide()
-
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                         or View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -81,5 +81,12 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         setContentView(gridView)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        broadcastSender.stopBroadcast()
+        broadcastReceiver.stopReceiver()
+        serverThread.stopServer()
     }
 }
