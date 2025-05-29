@@ -32,40 +32,36 @@ class MainActivity : AppCompatActivity() {
         val myIp = getLocalIpAddress()
         myIpTextView.text = "Your IP: $myIp"
 
-        gridView = GridViewCanvas(this) { touchedFromRemote ->
-            if (!touchedFromRemote) {
-                socketClient.send("TOUCH")
-            }
-        }
-
-        serverThread = 
-SocketServerThread { message, senderIp ->
-    if (message == "TOUCH") {
-        runOnUiThread {
-            gridView.blinkFromRemote()
-        }
-        if (!::socketClient.isInitialized || socketClient.targetIp != senderIp) {
-            socketClient = SocketClient(senderIp)
-        }
-    }
-
-            if (message == "TOUCH") {
-                runOnUiThread {
-                    gridView.blinkFromRemote()
-                }
-            }
-        }
-        serverThread.start()
-
         connectButton.setOnClickListener {
             val targetIp = ipInput.text.toString().trim()
             if (targetIp.isNotEmpty()) {
                 socketClient = SocketClient(targetIp)
+
+                gridView = GridViewCanvas(this,
+                    onTouchLocal = { offset ->
+                        socketClient.send("TOUCH", offset.toString())
+                    },
+                    onTouchRemote = { offset ->
+                        gridView.blinkFromRemote(offset)
+                    }
+                )
+
+                transitionToGrid(ipInput)
+                startServer()
+            }
+        }
+    }
+
+    private fun startServer() {
+        serverThread = SocketServerThread { event, data ->
+            if (event == "TOUCH") {
+                val offset = data.toIntOrNull()
                 runOnUiThread {
-                    transitionToGrid(ipInput)
+                    gridView.blinkFromRemote(offset)
                 }
             }
         }
+        serverThread.start()
     }
 
     private fun getLocalIpAddress(): String {
@@ -76,21 +72,22 @@ SocketServerThread { message, senderIp ->
     private fun transitionToGrid(ipInput: EditText) {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(ipInput.windowToken, 0)
-
         supportActionBar?.hide()
+
         window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                or View.SYSTEM_UI_FLAG_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+            View.SYSTEM_UI_FLAG_FULLSCREEN or
+            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         )
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+
         setContentView(gridView)
     }
 }

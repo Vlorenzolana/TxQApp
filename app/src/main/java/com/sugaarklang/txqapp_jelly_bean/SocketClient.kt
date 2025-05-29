@@ -5,14 +5,14 @@ import java.io.PrintWriter
 import java.net.Socket
 
 class SocketClient(val targetIp: String) {
-    fun send(message: String) {
+    fun send(event: String, data: String) {
         Thread {
             try {
                 val socket = Socket(targetIp, MainActivity.port)
                 val writer = PrintWriter(socket.getOutputStream(), true)
-                writer.println(message)
+                writer.println("\$event@\$data")
                 socket.close()
-                Log.i("SOCKET", "Sending message: $message")
+                Log.i("SOCKET", "Sending: \$event@\$data")
             } catch (e: Exception) {
                 e.printStackTrace()
             }
