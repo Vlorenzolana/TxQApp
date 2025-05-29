@@ -5,19 +5,34 @@ import java.io.PrintWriter
 import java.net.Socket
 
 class SocketClient(private val targetIp: String) {
+
+    private var socket: Socket? = null
+
+    fun connect() {
+        Thread {
+            try {
+                socket = Socket(targetIp, PORT)
+            } catch (e: Exception) {
+                Log.e("SOCKET", "Connection failed", e)
+            }
+        }.start()
+    }
+
     fun send(message: String) {
         Thread {
             try {
-                //Log.i("SOCKET", "Sending message: $message")
-                val socket = Socket(targetIp, MainActivity.port)
-                // Para que usamos autoflush: https://chatgpt.com/share/682ee7dc-6644-8002-8fb1-9f21d67f2be2
-                val writer = PrintWriter(socket.getOutputStream(), true)
-                writer.println(message)
-                socket.close()
-                Log.i("SOCKET", "Sending message: $message")
+                socket?.let {
+                    val writer = PrintWriter(it.getOutputStream(), true)
+                    writer.println(message)
+                    Log.i("SOCKET", "Sent message: $message")
+                } ?: Log.e("SOCKET", "Socket is null, unable to send message")
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e("SOCKET", "Error sending message", e)
             }
         }.start()
+    }
+
+    fun disconnect() {
+        socket?.close()
     }
 }

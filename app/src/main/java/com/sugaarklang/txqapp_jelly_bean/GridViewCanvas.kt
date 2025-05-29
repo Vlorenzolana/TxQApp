@@ -11,9 +11,7 @@ import android.view.View
 import android.util.Log
 import kotlin.random.Random
 
-//class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit, val onInactivity: Runnable) : View(context) {
 class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) : View(context) {
-//  private val INACTIVITY_TIMEOUT_MS = 1_000L  // 10 seconds, change as needed
     private val rows = 4
     private val cols = 4
 
@@ -37,10 +35,8 @@ class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) :
         cellWidth = width / cols.toFloat()
         cellHeight = height / rows.toFloat()
 
-        // Fill background
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), fillPaint)
 
-        // Draw blinked cell if any
         if (blinkRow != -1 && blinkCol != -1) {
             val left = blinkCol * cellWidth
             val top = blinkRow * cellHeight
@@ -48,7 +44,6 @@ class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) :
             val bottom = top + cellHeight
             canvas.drawRect(left, top, right, bottom, blinkPaint)
         }
-
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -60,13 +55,12 @@ class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) :
             blinkCol = col
             invalidate()
 
-            onTouchCallback(false) // local touch
+            onTouchCallback(false)
 
             handler.postDelayed({
                 blinkRow = -1
                 blinkCol = -1
                 invalidate()
-
             }, 100)
             Log.d("GRID", "On Touch Event")
             return true
@@ -75,7 +69,6 @@ class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) :
     }
 
     fun blinkFromRemote() {
-        // blink full screen for simplicity
         blinkRow = Random.nextInt(this.rows)
         blinkCol = Random.nextInt(this.cols)
         invalidate()
