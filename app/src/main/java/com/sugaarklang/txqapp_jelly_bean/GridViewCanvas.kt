@@ -18,10 +18,9 @@ class GridViewCanvas(
     val onTouchLocal: (Int) -> Unit,
     val onTouchRemote: (Int?) -> Unit
 ) : View(context) {
-
     private val fillPaint = Paint().apply { color = Color.BLACK }
     private val blinkPaint = Paint().apply { color = Color.WHITE }
-
+    private var isLocked = false
     private var flashWholeScreen = false
     private val handler = Handler(Looper.getMainLooper())
 
@@ -43,13 +42,17 @@ class GridViewCanvas(
         return super.onTouchEvent(event)
     }
 
-    fun blinkFromRemote(offset: Int?) {
-        if (offset != null) {
-            playDifferentSnippet(offset)
-        } else {
-            playRandomSnippet()
-        }
+    fun blinkFromRemote(offsetMs: Int?) {
+        if (isLocked) return
+        isLocked = true
+
+        val offset = offsetMs ?: 0
+        playDifferentSnippet(offset)
         flash()
+
+        handler.postDelayed({
+            isLocked = false
+        }, 200)
     }
 
     private fun flash() {

@@ -10,9 +10,9 @@ class SocketClient(val targetIp: String) {
             try {
                 val socket = Socket(targetIp, MainActivity.port)
                 val writer = PrintWriter(socket.getOutputStream(), true)
-                writer.println("\$event@\$data")
+                writer.println("$event@$data")
                 socket.close()
-                Log.i("SOCKET", "Sending: \$event@\$data")
+                Log.i("SOCKET", "Sending: $event@$data")
             } catch (e: Exception) {
                 e.printStackTrace()
             }
