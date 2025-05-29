@@ -1,3 +1,3 @@
 # TxQApp para Sugaarklang
 
-Sugaarklang es una escultura interactiva y utiliza TxQApp (txalakuantika) una aplicacion audiovisual inspirada en la txalaparta que emula un ciclo natural de lluvia a la vez que analiza los modelos de prediccion meteorologica dentro de su ecosistema inestable.
+La aplicación Android TxApp (txalakuantika) establece una conexión peer-to-peer simple usando sockets TCP. Cada dispositivo actúa simultáneamente como cliente y servidor, permitiendo una interacción táctil que se refleja remotamente. Al tocar la pantalla en un dispositivo, el otro responde mostrando un efecto visual (parpadeo en una celda aleatoria del grid). TxQApp se ha desarrollado para trabajar con Sugaarklang, una escultura interactiva una aplicacion audiovisual inspirada en la txalaparta que emula un ciclo natural de lluvia a la vez que analiza los modelos de prediccion meteorologica dentro de su ecosistema inestable.
