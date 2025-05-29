@@ -4,11 +4,13 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.media.MediaPlayer
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.util.Log
+import kotlin.random.Random
 
 class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) : View(context) {
 
@@ -18,35 +20,56 @@ class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) :
     private var flashWholeScreen = false
     private val handler = Handler(Looper.getMainLooper())
 
+    private val mediaPlayer: MediaPlayer = MediaPlayer.create(context, R.raw.beep)
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
-        if (flashWholeScreen) {
-            canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), blinkPaint)
-        } else {
-            canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), fillPaint)
-        }
+        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(),
+            if (flashWholeScreen) blinkPaint else fillPaint)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
-            flashFromTouch()
+            flashAndPlay()
             onTouchCallback(false)
             return true
         }
         return super.onTouchEvent(event)
     }
 
-    private fun flashFromTouch() {
-        flashWholeScreen = true
-        invalidate()
-        handler.postDelayed({
-            flashWholeScreen = false
-            invalidate()
-        }, 100)
+    fun blinkFromRemote() {
+        flashAndPlay()
     }
 
-    fun blinkFromRemote() {
-        flashFromTouch()
+    private fun flashAndPlay() {
+        flashWholeScreen = true
+        invalidate()
+
+        try {
+            if (mediaPlayer.isPlaying) {
+                mediaPlayer.pause()
+            }
+
+            val duration = mediaPlayer.duration
+            val maxStart = duration - 100
+            if (maxStart > 0) {
+                val randomStart = Random.nextInt(maxStart)
+                mediaPlayer.seekTo(randomStart)
+            } else {
+                mediaPlayer.seekTo(0)
+            }
+
+            mediaPlayer.start()
+
+            // Detener después de 100ms
+            handler.postDelayed({
+                mediaPlayer.pause()
+                flashWholeScreen = false
+                invalidate()
+            }, 100)
+
+        } catch (e: Exception) {
+            Log.e("AUDIO", "Error reproduciendo sonido: ${e.message}")
+        }
     }
 }

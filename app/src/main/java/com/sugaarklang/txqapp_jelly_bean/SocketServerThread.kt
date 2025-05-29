@@ -4,9 +4,10 @@ import android.util.Log
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.ServerSocket
+import java.net.Socket
 
 class SocketServerThread(
-    private val onMessageReceived: (String) -> Unit
+    private val onMessageReceived: (String, String) -> Unit
 ) : Thread() {
     override fun run() {
         try {
@@ -15,9 +16,10 @@ class SocketServerThread(
                 val client = serverSocket.accept()
                 val reader = BufferedReader(InputStreamReader(client.getInputStream()))
                 val message = reader.readLine()
-                Log.i("SOCKET", "Message Received: $message")
+                val clientIp = client.inetAddress.hostAddress
+                Log.i("SOCKET", "Message Received from $clientIp: $message")
                 if (message != null) {
-                    onMessageReceived(message)
+                    onMessageReceived(message, clientIp)
                 }
                 client.close()
             }

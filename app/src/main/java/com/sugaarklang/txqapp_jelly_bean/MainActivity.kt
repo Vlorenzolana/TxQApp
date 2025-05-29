@@ -38,7 +38,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        serverThread = SocketServerThread { message ->
+        serverThread = 
+SocketServerThread { message, senderIp ->
+    if (message == "TOUCH") {
+        runOnUiThread {
+            gridView.blinkFromRemote()
+        }
+        if (!::socketClient.isInitialized || socketClient.targetIp != senderIp) {
+            socketClient = SocketClient(senderIp)
+        }
+    }
+
             if (message == "TOUCH") {
                 runOnUiThread {
                     gridView.blinkFromRemote()

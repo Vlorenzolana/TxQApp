@@ -4,7 +4,7 @@ import android.util.Log
 import java.io.PrintWriter
 import java.net.Socket
 
-class SocketClient(private val targetIp: String) {
+class SocketClient(val targetIp: String) {
     fun send(message: String) {
         Thread {
             try {
