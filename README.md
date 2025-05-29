@@ -89,4 +89,4 @@ TxQApp creates a reactive audiovisual dialogue between two Android tablets over 
 
 ---
 
-Developed with ❤️ by [Vanessa Lorenzo]rsión, al tocar la pantalla se genera un fragmento aleatorio del sonido y se envía el offset exacto al otro dispositivo. El receptor escoge otro fragmento distinto automáticamente, garantizando variedad sonora en cada diálogo.
+Developed with ❤️ by vlorenzolana & BCastro
