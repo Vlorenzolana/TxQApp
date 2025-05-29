@@ -12,9 +12,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/BroadcastReceiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/BroadcastSender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/Constants.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/GridViewCanvas.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/GridViewCanvas.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/SocketClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/SocketClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/SocketServerThread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/SocketServerThread.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

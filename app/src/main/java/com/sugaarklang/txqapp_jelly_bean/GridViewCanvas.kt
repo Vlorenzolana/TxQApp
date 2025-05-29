@@ -11,6 +11,7 @@ import android.view.View
 import android.util.Log
 
 class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) : View(context) {
+
     private val fillPaint = Paint().apply { color = Color.BLACK }
     private val blinkPaint = Paint().apply { color = Color.WHITE }
 
@@ -19,6 +20,7 @@ class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) :
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+
         if (flashWholeScreen) {
             canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), blinkPaint)
         } else {
@@ -28,23 +30,23 @@ class GridViewCanvas(context: Context, val onTouchCallback: (Boolean) -> Unit) :
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
-            flashVisualPattern()
+            flashFromTouch()
             onTouchCallback(false)
             return true
         }
         return super.onTouchEvent(event)
     }
 
-    private fun flashVisualPattern() {
+    private fun flashFromTouch() {
         flashWholeScreen = true
         invalidate()
         handler.postDelayed({
             flashWholeScreen = false
             invalidate()
-        }, 80)
+        }, 100)
     }
 
-    fun flashFullScreen() {
-        flashVisualPattern()
+    fun blinkFromRemote() {
+        flashFromTouch()
     }
 }

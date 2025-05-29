@@ -4,15 +4,14 @@ import android.util.Log
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.ServerSocket
-import java.net.SocketException
 
-class SocketServerThread(private val onMessageReceived: (String) -> Unit) : Thread() {
-    private lateinit var serverSocket: ServerSocket
-
+class SocketServerThread(
+    private val onMessageReceived: (String) -> Unit
+) : Thread() {
     override fun run() {
         try {
-            serverSocket = ServerSocket(PORT)
-            while (!interrupted()) {
+            val serverSocket = ServerSocket(MainActivity.port)
+            while (true) {
                 val client = serverSocket.accept()
                 val reader = BufferedReader(InputStreamReader(client.getInputStream()))
                 val message = reader.readLine()
@@ -22,15 +21,8 @@ class SocketServerThread(private val onMessageReceived: (String) -> Unit) : Thre
                 }
                 client.close()
             }
-        } catch (e: SocketException) {
-            Log.e("SOCKET", "Server socket closed", e)
         } catch (e: Exception) {
-            Log.e("SOCKET", "Server error", e)
+            e.printStackTrace()
         }
-    }
-
-    fun stopServer() {
-        interrupt()
-        serverSocket.close()
     }
 }
