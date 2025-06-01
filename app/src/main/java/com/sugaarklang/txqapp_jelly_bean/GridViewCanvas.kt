@@ -10,21 +10,24 @@ import android.os.Looper
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.annotation.RawRes
 import kotlin.math.abs
 import kotlin.random.Random
 
 class GridViewCanvas(
     context: Context,
+    @RawRes soundResId: Int,
     val onTouchLocal: (Int) -> Unit,
     val onTouchRemote: (Int?) -> Unit
 ) : View(context) {
+
     private val fillPaint = Paint().apply { color = Color.BLACK }
     private val blinkPaint = Paint().apply { color = Color.WHITE }
     private var isLocked = false
     private var flashWholeScreen = false
     private val handler = Handler(Looper.getMainLooper())
 
-    private val mediaPlayer: MediaPlayer = MediaPlayer.create(context, R.raw.beep)
+    private val mediaPlayer: MediaPlayer = MediaPlayer.create(context, soundResId)
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

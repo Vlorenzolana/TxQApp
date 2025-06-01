@@ -1,34 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ipInputContainer"
-    android:orientation="vertical"
-    android:padding="24dp"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/myIpTextView"
-        android:text="Your IP: loading..."
-        android:textSize="18sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="24dp"/>
-
-
-    <EditText
-        android:id="@+id/ipInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter other tablet's IP"
-        android:inputType="text"
-        android:padding="12dp"
-        android:text="172.16.64." />
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#000000">
 
     <Button
-        android:id="@+id/connectButton"
-        android:layout_width="match_parent"
+        android:id="@+id/btnDemoMode"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Connect" />
+        android:text="Modo Demo"
+        android:textColor="#FFFFFF"
+        android:background="@android:color/holo_blue_dark"
+        android:padding="16dp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/btnNetworkMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modo Red"
+        android:textColor="#FFFFFF"
+        android:background="@android:color/holo_green_dark"
+        android:padding="16dp"/>
 
 </LinearLayout>

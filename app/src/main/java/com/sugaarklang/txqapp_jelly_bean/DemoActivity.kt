@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 
 class DemoActivity : AppCompatActivity() {
@@ -16,15 +17,21 @@ class DemoActivity : AppCompatActivity() {
         2f, 2f, 2f, 2f, 4f, 4f
     )
 
-    private val bpm = 60f
     private val handler = Handler(Looper.getMainLooper())
     private var currentIndex = 0
 
     private lateinit var mediaPlayerA: MediaPlayer
     private lateinit var mediaPlayerB: MediaPlayer
+    private lateinit var visualView: DemoVisualView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        visualView = DemoVisualView(this)
+        setContentView(FrameLayout(this).apply {
+            setBackgroundColor(0xFF000000.toInt()) // fondo negro
+            addView(visualView)
+        })
 
         mediaPlayerA = MediaPlayer.create(this, R.raw.beep_a)
         mediaPlayerB = MediaPlayer.create(this, R.raw.beep_b)
@@ -37,13 +44,19 @@ class DemoActivity : AppCompatActivity() {
 
         val durationInSeconds = compases[currentIndex]
         val durationInMs = (durationInSeconds * 1000).toLong()
-
         val isA = currentIndex % 2 == 0
         val player = if (isA) mediaPlayerA else mediaPlayerB
+
         Log.d("RHYTHM", "Compás ${currentIndex / 2 + 1} ${if (isA) "A" else "B"} duración $durationInSeconds s")
 
-        player.seekTo(0)
-        player.start()
+        visualView.randomTouch(visualView.width.takeIf { it > 0 } ?: 1080, visualView.height.takeIf { it > 0 } ?: 1920)
+
+        handler.postDelayed({
+            visualView.flash()
+            player.seekTo(0)
+            player.start()
+        }, 100)
+
         handler.postDelayed({
             currentIndex++
             startLoop()

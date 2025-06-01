@@ -10,13 +10,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<Button>(R.id.btnDemoMode).setOnClickListener {
-            val intent = Intent(this, DemoActivity::class.java)
-            startActivity(intent)
+        val btnDemo = findViewById<Button>(R.id.btnDemoMode)
+        btnDemo.setOnClickListener {
+            startActivity(Intent(this, DemoActivity::class.java))
         }
 
-        findViewById<Button>(R.id.btnNetworkMode).setOnClickListener {
-            // Aquí se lanzaría otra Activity futura para modo en red
+        val btnNetwork = findViewById<Button>(R.id.btnNetworkMode)
+        btnNetwork.setOnClickListener {
+            startActivity(Intent(this, NetworkConfigActivity::class.java))
         }
+    }
+
+    companion object {
+        const val port = 12345
     }
 }
