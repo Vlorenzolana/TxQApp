@@ -29,26 +29,28 @@ class MainActivity : AppCompatActivity() {
         val ipInput = findViewById<EditText>(R.id.ipInput)
         val connectButton = findViewById<Button>(R.id.connectButton)
 
+        val demoMode = true // Activa modo demo simulado
+
         val myIp = getLocalIpAddress()
         myIpTextView.text = "Your IP: $myIp"
 
         connectButton.setOnClickListener {
-            val targetIp = ipInput.text.toString().trim()
-            if (targetIp.isNotEmpty()) {
-                socketClient = SocketClient(targetIp)
+            socketClient = SocketClient("127.0.0.1") // no se usa en demo
 
-                gridView = GridViewCanvas(this,
-                    onTouchLocal = { offset ->
-                        socketClient.send("TOUCH", offset.toString())
-                    },
-                    onTouchRemote = { offset ->
-                        gridView.blinkFromRemote(offset)
+            gridView = GridViewCanvas(this,
+                onTouchLocal = { offset ->
+                    if (!demoMode) socketClient.send("TOUCH", offset.toString())
+                    if (demoMode) {
+                        gridView.blinkFromRemote(offset + 250) // simula respuesta
                     }
-                )
+                },
+                onTouchRemote = { offset ->
+                    gridView.blinkFromRemote(offset)
+                }
+            )
 
-                transitionToGrid(ipInput)
-                startServer()
-            }
+            transitionToGrid(ipInput)
+            if (!demoMode) startServer()
         }
     }
 
