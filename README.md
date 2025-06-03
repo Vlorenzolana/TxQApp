@@ -1,4 +1,4 @@
-# TxQApp - Comunicación audiovisual entre dos tablets
+# TxQApp
 
 ---
 
