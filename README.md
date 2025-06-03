@@ -2,7 +2,7 @@
 
 ---
 
-## 🧠 Descripción general
+## Descripción
 
 TxQApp permite la comunicación reactiva entre dos tablets Android a través de una red WiFi local. Al detectar una interacción táctil ("gota"), se genera una reacción audiovisual (parpadeo de pantalla + sonido). La segunda tablet reacciona con su propia interpretación audiovisual, creando un diálogo interactivo.
 
@@ -27,7 +27,7 @@ TxQApp/
 
 ---
 
-## ✨ Funciones clave
+## Funciones clave
 
 - **Comunicación en red local** usando `SocketClient` y `SocketServerThread`.
 - **Diálogo audiovisual** con:
@@ -37,7 +37,7 @@ TxQApp/
 
 ---
 
-## 🧪 Cómo usar
+## Cómo usar
 
 1. Conecta ambas tablets a la **misma red WiFi**.
 2. En la primera tablet, introduce la IP de la segunda tablet.
@@ -47,7 +47,7 @@ TxQApp/
 
 ---
 
-## 🧩 Código fuente destacado
+## Código fuente destacado
 
 **Función auxiliar `generateDifferentOffset()`**
 ```kotlin
@@ -62,11 +62,11 @@ private fun generateDifferentOffset(referenceOffset: Int, duration: Int): Int {
 
 # TxQApp - Elkarrizketa bisual eta akustikoa bi tablet artean
 
-## 🧠 Deskribapena
+## Deskribapena
 
 TxQApp-ek bi tablet-en artean elkarreragiteko sistema sortzen du. Ukipen batek (esaterako, ur tanta bat) ekintza pizten du eta bigarren tablet-ak erantzun propio bat sortzen du.
 
-## 🔧 Funtzionalitateak
+## Funtzionalitateak
 
 - Tablet bakoitzak entzuten eta bidaltzen du bere IP-rekin.
 - Pantaila zuriz piztu eta itzaltzen da.
@@ -77,11 +77,11 @@ TxQApp-ek bi tablet-en artean elkarreragiteko sistema sortzen du. Ukipen batek (
 
 # TxQApp - Audio-visual tablet interaction
 
-## 🧠 Description
+##  Description
 
 TxQApp creates a reactive audiovisual dialogue between two Android tablets over local WiFi. A screen touch on one device triggers a flash and sound snippet. The second device responds with its own audiovisual version.
 
-## 🔧 Features
+## Features
 
 - Local communication using sockets.
 - Sound sample divided into small random fragments.
@@ -89,4 +89,4 @@ TxQApp creates a reactive audiovisual dialogue between two Android tablets over 
 
 ---
 
-Developed with ❤️ by vlorenzolana & BCastro
+Developed by vlorenzolana & BCastro
