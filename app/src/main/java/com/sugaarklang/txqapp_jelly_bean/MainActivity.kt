@@ -2,6 +2,8 @@ package com.sugaarklang.txqapp_jelly_bean
 
 import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.format.Formatter
 import android.widget.Button
 import android.widget.EditText
@@ -16,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var socketClient: SocketClient
     private lateinit var serverThread: SocketServerThread
     private lateinit var gridView: GridViewCanvas
+    private lateinit var ipDiscovery: IpDiscovery
+    private var ipDiscovered: String? = null
 
     companion object {
         val port = 12345
@@ -29,12 +33,46 @@ class MainActivity : AppCompatActivity() {
         val ipInput = findViewById<EditText>(R.id.ipInput)
         val connectButton = findViewById<Button>(R.id.connectButton)
 
+        // Mostrar IP local
         val myIp = getLocalIpAddress()
         myIpTextView.text = "Your IP: $myIp"
 
+        // Inicialmente desactivado hasta tener IP válida (manual o auto)
+        connectButton.isEnabled = false
+
+        // Descubrimiento automático de IPs (anuncia y escucha)
+        ipDiscovery = IpDiscovery(
+            onIpDiscovered = { senderIp ->
+                runOnUiThread {
+                    if (senderIp != myIp) {
+                        ipDiscovered = senderIp
+                        ipInput.setText(senderIp)
+                        connectButton.text = "Connect to $senderIp"
+                        connectButton.isEnabled = true
+                    }
+                }
+            }
+        )
+        ipDiscovery.startListening()
+        ipDiscovery.startBroadcasting()
+
+        // Permite escribir manualmente si el usuario lo desea
+        ipInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                connectButton.isEnabled = s.toString().trim().isNotEmpty()
+                if (s.toString().trim() != ipDiscovered) {
+                    connectButton.text = "Connect"
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // Al pulsar conectar: detiene broadcast/escucha y monta la GridView
         connectButton.setOnClickListener {
             val targetIp = ipInput.text.toString().trim()
             if (targetIp.isNotEmpty()) {
+                ipDiscovery.stop()
                 socketClient = SocketClient(targetIp)
 
                 gridView = GridViewCanvas(this,
