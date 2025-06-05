@@ -17,20 +17,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d80ff456-be6f-41ef-8a61-395e59be0d59" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/txalaparta.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/r1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/r2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/r3.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/r4.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/AutoDiscoveryMAnager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/NetworkManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/NetworkManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/TxalapartaEngine.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sugaarklang/txqapp_jelly_bean/TxalapartaEngine.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/beep_a.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/beep_b.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/txalaparta.wav" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/raw/txalaparta.wav" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +48,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=1305141201710), DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=1312134201721)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=1305141201710)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -89,12 +97,17 @@
   &quot;keyToString&quot;: {
     &quot;Android App.MainActivity.executor&quot;: &quot;Run&quot;,
     &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;DEBUGGABLE_DEVICE&quot;: &quot;bq_curie_2_quad_core-1305141201710&quot;,
+    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.sugaarklang.txqapp_jelly_bean&quot;,
+    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;demo&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
@@ -274,6 +287,16 @@
         <entry key="com.sugaarklang.txqapp_jelly_bean.test">
           <value>
             <CheckInfo lastCheckTimestamp="1748946759439" />
+          </value>
+        </entry>
+        <entry key="com.sugaarklang.txqapp_jelly_bean_v2">
+          <value>
+            <CheckInfo lastCheckTimestamp="1749125386602" />
+          </value>
+        </entry>
+        <entry key="com.sugaarklang.txqapp_jelly_bean_v2.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1749125386602" />
           </value>
         </entry>
       </map>

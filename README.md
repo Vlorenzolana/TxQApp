@@ -1,15 +1,11 @@
-# TxQApp - Comunicación audiovisual entre dos tablets
-
+# TxQApp - Dialogo audiovisual entre dos tablets
+ENGLISH BELOW
 ---
-
-## 🧠 Descripción general
-
+## Descripción
 TxQApp permite la comunicación reactiva entre dos tablets Android a través de una red WiFi local. Al detectar una interacción táctil ("gota"), se genera una reacción audiovisual (parpadeo de pantalla + sonido). La segunda tablet reacciona con su propia interpretación audiovisual, creando un diálogo interactivo.
-
 ---
 
-## 📁 Mapa de directorio
-
+## Directorio
 ```
 TxQApp/
 ├── app/
@@ -17,76 +13,75 @@ TxQApp/
 │   │   ├── main/
 │   │   │   ├── java/com/sugaarklang/txqapp_jelly_bean/
 │   │   │   │   ├── MainActivity.kt
-│   │   │   │   ├── GridViewCanvas.kt
-│   │   │   │   ├── SocketClient.kt
-│   │   │   │   ├── SocketServerThread.kt
+│   │   │   │   ├── TxalapartaEngine.kt
 │   │   │   ├── res/
 │   │   │   │   ├── layout/activity_main.xml
-│   │   │   │   ├── raw/beep.wav
+│   │   │   │   ├── raw/txalaparta.wav
 ```
+---
+
+# TxQApp - Audiovisual Dialogue Between Two Tablets
+---
+## Description
+TxQApp enables reactive communication between two Android tablets over a local Wi-Fi network. Upon detecting a touch interaction ("droplet"), an audiovisual reaction (screen flashing + sound) is generated. The second tablet reacts with its own audiovisual interpretation, creating an interactive dialogue.
 
 ---
 
-## ✨ Funciones clave
-
-- **Comunicación en red local** usando `SocketClient` y `SocketServerThread`.
-- **Diálogo audiovisual** con:
-    - Pantalla que parpadea.
-    - Fragmento de sonido aleatorio reproducido en cada interacción.
-    - El receptor nunca repite el mismo fragmento que el emisor gracias a `generateDifferentOffset(...)`.
-
+## Features
+- **Local network communication** using `SocketClient` and `SocketServerThread`.
+- **Audiovisual dialogue** with:
+- A flickering screen.
+- A random sound fragment played during each interaction.
+- The receiver never repeats the same fragment as the sender thanks to `generateDifferentOffset(...)`.
 ---
 
-## 🧪 Cómo usar
-
-1. Conecta ambas tablets a la **misma red WiFi**.
-2. En la primera tablet, introduce la IP de la segunda tablet.
-3. Presiona "Connect".
-4. Al tocar la pantalla, se desencadena una acción-reacción.
-5. El ciclo se repite alternando roles.
-
+## How to use
+1. Connect both tablets to the **same WiFi network**.
+2. On the first tablet, press "Start Performance".
+3. On the second tablet: enter the IP address of the first tablet. Press "Connect".
+4. The rhythm engine begins generating turn-based cycles with dynamic progression.
+5. The cycle repeats, alternating minutes of silence.
 ---
 
-## 🧩 Código fuente destacado
-
-**Función auxiliar `generateDifferentOffset()`**
-```kotlin
-private fun generateDifferentOffset(referenceOffset: Int, duration: Int): Int {
-    val maxStart = duration - 100
-    val range = (0..maxStart).filter { kotlin.math.abs(it - referenceOffset) > 200 }
-    return if (range.isNotEmpty()) range.random() else 0
-}
-```
-
+# How the Rhythm Engine Works (TxalapartaEngine)
+The app's rhythm engine automatically generates rhythmic beat cycles with dynamic progression and scheduled rests. The engine regulates the **beat pattern**, the **density** (probability of a beat or a rest), and the **tempo**, and after each cycle, forces a period of **total silence** for 1 minute.
 ---
 
-# TxQApp - Elkarrizketa bisual eta akustikoa bi tablet artean
-
-## 🧠 Deskribapena
-
-TxQApp-ek bi tablet-en artean elkarreragiteko sistema sortzen du. Ukipen batek (esaterako, ur tanta bat) ekintza pizten du eta bigarren tablet-ak erantzun propio bat sortzen du.
-
-## 🔧 Funtzionalitateak
-
-- Tablet bakoitzak entzuten eta bidaltzen du bere IP-rekin.
-- Pantaila zuriz piztu eta itzaltzen da.
-- Audio-lagin baten zati txiki bat jotzen da ausaz.
-- Bigarren tabletak ez du inoiz errepikatzen lehenengoaren zatia.
-
+## Phase and Pattern Cycle
+| Phase      | Duration (beats) | Pattern                | Tempo  Curve | Density           | Tempo (BPM)             |
+|------------|------------------|------------------------|--------------|-------------------|-------------------------|
+| SOFT_START | 5                | "hiru" (3 golpes)      | lineal       | 0.3 → 0.6         | 60 (lento, sube lento)  |
+| GROWTH     | 15               | "hiru/lau/improvisado" | exponencial  | 0.6 → 0.9         | 80 (más rápido)         |
+| CLIMAX     | 10               | "improvisado" (3-7)    | exponencial  | 0.95 (casi todos) | 120 (muy rápido)        |
+| CODA       | 10               | "hiru"                 | logarítmica  | 0.95 → 0.5        | 180→↓ (desacelera)      |
+| SILENCE    | 1 min            | (sin golpes ni sonido) | —            | 0.0               | 0                       |
 ---
 
-# TxQApp - Audio-visual tablet interaction
+### Phase Description
 
-## 🧠 Description
+- **SOFT_START:**
+  Soft start, simple pattern ("hiru"), few hits, and low tempo. Density gradually increases.
 
-TxQApp creates a reactive audiovisual dialogue between two Android tablets over local WiFi. A screen touch on one device triggers a flash and sound snippet. The second device responds with its own audiovisual version.
+- **GROWTH:**
+  The rhythm becomes more complex and varied, alternating patterns. Tempo and density increase more rapidly.
 
-## 🔧 Features
+- **CLIMAX:**
+  Maximum intensity phase: improvised pattern, almost all possible beats played, high tempo.
 
-- Local communication using sockets.
-- Sound sample divided into small random fragments.
-- Second device always plays a different snippet (not the same offset as the first).
+- **CODA:**
+  Deceleration and simplification: returns to a simple pattern ("hiru"), density and tempo progressively decrease.
 
+- **SILENCE:**
+  Total silence (1 minute): no beats, no sound, no visual animation.
+
+After this minute, **the cycle restarts** automatically from SOFT_START.
 ---
 
-Developed with ❤️ by vlorenzolana & BCastro
+## Visual and Audio
+
+- **Hits and silences**:
+  On each turn, the density determines the probability of each beat being present or not (some turns will have pauses).
+- **In SILENCE**, there are no hits, sounds, or animations.
+---
+
+Developed with ❤️ by Vlorenzolana & BCastro

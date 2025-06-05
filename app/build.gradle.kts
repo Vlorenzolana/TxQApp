@@ -8,7 +8,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.sugaarklang.txqapp_jelly_bean"
+        applicationId = "com.sugaarklang.txqapp_jelly_bean_v2"
         minSdk = 17
         targetSdk = 35
         versionCode = 1
